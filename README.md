@@ -3,9 +3,16 @@
 ### Description
 Sample code for serving config data not available through PAPI. Caching added to ensure the code doesn't impact services.
 
-### Instructions
+### Download
+On the cluster run the following command:
+
+```curl -o isi_tiny_api.zip https://github.com/j-sims/isitinyapi/archive/refs/heads/main.zip```
+
+### Installation
 - copy files to cluster and note the INSTALL path of the files
   - suggested location /ifs/data/Isilon_Support/tinyapi
+- edit the config.json to identify the keys and commands required.
+  - keep the list as short as possible and keep in mind the runtime that each command will take (total cannot exceed 2 min)
 - edit the isi_tiny_api.py and set the INSTALLPATH variable to the location of the files if necessary
 - edit the /etc/mcp/templates/crontab file and add the following lines to the end per this KB: https://www.dell.com/support/kbdoc/en-us/000190875/isilon-how-to-automate-weekly-cluster-log-uploads-isi-gather-info
 
