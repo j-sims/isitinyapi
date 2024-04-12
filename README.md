@@ -10,6 +10,7 @@ All responses are returned in JSON format.
 Currently, only a single endpoint ('/') is provided, which returns all `sysctl` keys and the outputs of all commands specified in the `config.json` file.
 
 ## Installation
+Installing the service requires the root user and modifications to the crontab and to the apache config file.
 
 ### Single Node or All Nodes?
 If the data that is needed can be collected from a single node then the installation can be performed on one node. However, if the data needed is from each node then the installation will need to be performed on all nodes.
@@ -56,7 +57,7 @@ LoadModule proxy_module modules/mod_proxy.so
 LoadModule proxy_http_module modules/mod_proxy_http.so
 ```
 
-#### Add this location section near the bottom after the last \<Location\> section
+#### Add this immeditaly after the Platform API section
 ```
     # =================================================
     # Tiny API
@@ -83,10 +84,18 @@ LoadModule proxy_http_module modules/mod_proxy_http.so
 ```isi_for_array bash /ifs/data/Isilon_Support/isitinyapi-main/deployhttpdconf.sh```
 
 ### Start the Service
+
+**single node**
 ```
 bash /ifs/data/Isilon_Support/isitinyapi-main/run.sh && \
 ps -auxww | grep isi_tiny_api.py | grep -v grep > /dev/null && echo Running || echo "Not Running"
 ```
+
+**all nodes**
+```
+isi_for_array bash /ifs/data/Isilon_Support/isitinyapi-main/run.sh
+```
+
 
 ### Test the Service
 open a broweser to https://CLUSTER:8080/tinyapi
