@@ -70,12 +70,15 @@ LoadModule proxy_http_module modules/mod_proxy_http.so
     # =================================================
     <Location /tinyapi>
         AuthType Isilon
-        IsiAuthName "namespace"
+        IsiAuthName "platform"
         IsiAuthTypeBasic On
         IsiAuthTypeSessionCookie On
-        Require valid-user
+        IsiDisabledZoneAllow Off
+        IsiMultiZoneAllow On
+        IsiCsrfCheck On
         ProxyPass "http://localhost:8000/"
         ProxyPassReverse "http://localhost:8000/"
+        Require valid-user
         SetHandler fastcgi-script
         Options +ExecCGI
         ErrorDocument 401 /json/401.json
