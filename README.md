@@ -1,19 +1,18 @@
 # Isi Tiny API
 
 ### Description
-Sample code to allow polling of cluster state data unavaible via PAPI without running shell scripts locally.
+This sample code enables polling of cluster state data that is unavailable via PAPI without the need to run shell scripts locally.
 
-Code should be used to obtain sysctl and other command output for use with monitoring or dashboards.
+The code should be used to obtain outputs from `sysctl` and other commands for monitoring or dashboards.
 
-All responses will be returned in json format.
+All responses are returned in JSON format.
 
-At present only a single endpoing ('/') is provided which will return all sysctl keys and the output of all commands in the config.json file.
-
+Currently, only a single endpoint ('/') is provided, which returns all `sysctl` keys and the outputs of all commands specified in the `config.json` file.
 
 ### Installation
 
 #### Download
-On the cluster run the following command:
+On the cluster, run the following command to download and set up the API:
 
 ```
 cd /ifs/data/Isilon_Supoprt
@@ -65,8 +64,8 @@ Add this location section near the bottom after the last Location section
 ```
 
 ### Limitations
-The code is designed to poll a few sysctls and/or run a handful of commands. The default caching is 1 hour to minimize the impact from running external commands. Reducing the cache timer or significantly increasing the number of commands run can have a detrimental effect on a cluster.
+This code is engineered to efficiently monitor a select set of sysctl parameters and execute a limited number of commands. By default, it employs a caching mechanism with a one-hour duration to minimize system load from frequent external command executions. Any reduction in the caching period or a significant increase in the number of commands could adversely affect cluster performance.
 
-The code is designed to only allow GET options and is intended to only allow access on the localhost address to minimize the surface area of attacks. Changing either should only be done with careful consideration and the approval of the infosec team.
+The application is configured to accept only GET requests and restricts access exclusively to the localhost. This design limits the potential for external attacks. Any modifications to these settings should be undertaken only after thorough evaluation and must be approved by the information security team.
 
 The changes in these instructions may be lost during upgrades. After each upgrade check to see if the service is still operating and re-install if needed.
