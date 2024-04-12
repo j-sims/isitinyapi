@@ -32,10 +32,14 @@ cd isitinyapi-main
 ### Add to mcp crontab
 
 **single node**
-```bash /ifs/data/Isilon_Support/isitinyapi-main/installcron.sh```
+```
+bash /ifs/data/Isilon_Support/isitinyapi-main/installcron.sh
+```
 
 **all nodes**
-```isi_for_array bash /ifs/data/Isilon_Support/isitinyapi-main/installcron.sh```
+```
+isi_for_array bash /ifs/data/Isilon_Support/isitinyapi-main/installcron.sh
+```
 
 
 Once the cron entry is in place the run.sh script will check hourly to see if the isi_tiny_api.py script is running and if not, will start the script.
@@ -43,7 +47,9 @@ Once the cron entry is in place the run.sh script will check hourly to see if th
 ### Configure Apache
 
 ### Copy /usr/local/apache2/conf/webui_httpd.conf
-```cp  /usr/local/apache2/conf/webui_httpd.conf /ifs/data/Isilon_Support/isitinyapi-main```
+```
+cp  /usr/local/apache2/conf/webui_httpd.conf /ifs/data/Isilon_Support/isitinyapi-main
+```
 
 ### Edit /ifs/data/Isilon_Support/isitinyapi-main/webui_httpd.conf
 
@@ -78,10 +84,14 @@ LoadModule proxy_http_module modules/mod_proxy_http.so
 
 ### Deploy apache config
 **single node**
-```bash /ifs/data/Isilon_Support/isitinyapi-main/deployhttpdconf.sh```
+```
+bash /ifs/data/Isilon_Support/isitinyapi-main/deployhttpdconf.sh
+```
 
 **all nodes**
-```isi_for_array bash /ifs/data/Isilon_Support/isitinyapi-main/deployhttpdconf.sh```
+```
+isi_for_array bash /ifs/data/Isilon_Support/isitinyapi-main/deployhttpdconf.sh
+```
 
 ### Start the Service
 
