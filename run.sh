@@ -1,0 +1,1 @@
+ps -auxww | grep isi_tiny_api.py | grep -v grep > /dev/null || nohup python3 isi_tiny_api.py >/dev/null 2>&1 &
