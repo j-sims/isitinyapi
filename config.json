@@ -7,5 +7,5 @@
         "cache_file" : "/tmp/isi_tiny_api.cache"
         },
     "sysctl" : [ "kern.minvnodes", "vfs.numvnodes", "vfs.numvnodes", "vfs.freevnodes", "vfs.wantfreevnodes" ],
-    "commands": ["hostname"]
+    "commands": ["hostname", "date", "uptime"]
 }
