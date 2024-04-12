@@ -18,7 +18,7 @@ On the cluster, run the following command to download and set up the API:
 cd /ifs/data/Isilon_Support
 curl -k -L -o isi_tiny_api.zip https://github.com/j-sims/isitinyapi/archive/refs/heads/main.zip
 unzip isi_tiny_api.zip
-cd isitinyapi
+cd isitinyapi-main
 ```
 
 #### Edit the config.json
@@ -30,7 +30,7 @@ cd isitinyapi
 
 ```
 # Every hour check to ensure isi_tiny_api is running
-0       *       *       *       *       root    /bin/bash /ifs/data/Isilon_Support/isitinyapi/run.sh
+0       *       *       *       *       root    /bin/bash /ifs/data/Isilon_Support/isitinyapi-main/run.sh
 ```
 
 Once the cron entry is in place the run.sh script will check hourly to see if the isi_tiny_api.py script is running and if not, will start the script.
@@ -69,3 +69,21 @@ This code is engineered to efficiently monitor a select set of sysctl parameters
 The application is configured to accept only GET requests and restricts access exclusively to the localhost. This design limits the potential for external attacks. Any modifications to these settings should be undertaken only after thorough evaluation and must be approved by the information security team.
 
 The changes in these instructions may be lost during upgrades. After each upgrade check to see if the service is still operating and re-install if needed.
+
+### Stop / Start
+
+#### Stop
+```
+ps -auxww | grep isi_tiny_api.py | grep -v grep | awk '{print$2}' | xargs kill -9
+```
+
+#### Start
+```
+cd /ifs/data/Isilon_Support/isitinyapi-main
+bash run.sh
+```
+
+### Upgrade or Config Changes
+Updates are only recognized and implemented at startup. For an upgrade, simply download and install the latest version over the existing one. Then, restart the system to activate the upgrade.
+
+The same procedure applies for configuration updates.
