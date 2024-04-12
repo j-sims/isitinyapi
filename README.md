@@ -15,7 +15,7 @@ Currently, only a single endpoint ('/') is provided, which returns all `sysctl` 
 On the cluster, run the following command to download and set up the API:
 
 ```
-cd /ifs/data/Isilon_Supoprt
+cd /ifs/data/Isilon_Support
 curl -o isi_tiny_api.zip https://github.com/j-sims/isitinyapi/archive/refs/heads/main.zip
 unzip isi_tiny_api.zip
 cd isitinyapi
