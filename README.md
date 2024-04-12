@@ -172,6 +172,8 @@ LoadModule proxy_http_module modules/mod_proxy_http.so
         IsiDisabledZoneAllow Off
         IsiMultiZoneAllow On
         IsiCsrfCheck On
+        ProxyPass "http://localhost:8000/"
+        ProxyPassReverse "http://localhost:8000/"
         Require valid-user
         SetHandler fastcgi-script
         Options +ExecCGI
