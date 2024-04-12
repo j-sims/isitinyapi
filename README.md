@@ -82,6 +82,15 @@ LoadModule proxy_http_module modules/mod_proxy_http.so
 **all nodes**
 ```isi_for_array bash /ifs/data/Isilon_Support/isitinyapi-main/deployhttpdconf.sh```
 
+### Start the Service
+```
+bash /ifs/data/Isilon_Support/isitinyapi-main/run.sh && \
+ps -auxww | grep isi_tiny_api.py | grep -v grep > /dev/null && echo Running || echo "Not Running"
+```
+
+### Test the Service
+open a broweser to https://CLUSTER:8080/tinyapi
+(replace CLUSTER with the name or IP of your cluster)
 
 ## Limitations
 This code is engineered to efficiently monitor a select set of sysctl parameters and execute a limited number of commands. By default, it employs a caching mechanism with a one-hour duration to minimize system load from frequent external command executions. Any reduction in the caching period or a significant increase in the number of commands could adversely affect cluster performance.
