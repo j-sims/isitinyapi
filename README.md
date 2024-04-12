@@ -25,7 +25,7 @@ cd isitinyapi
 
 ```
 # Every hour check to ensure isi_tiny_api is running
-0       *       *       *       *       root    /bin/bash $INSTALLPATH/run.sh
+0       *       *       *       *       root    /bin/bash /ifs/data/Isilon_Support/isitinyapi/run.sh
 ```
 
 Once the cron entry is in place the run.sh script will check hourly to see if the isi_tiny_api.py script is running and if not, will start the script.
