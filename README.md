@@ -1,13 +1,13 @@
 # Isi Tiny API
 
 ### Description
-Sample code to allow for polling of cluster state data without running shell scripts locally.
+Sample code to allow polling of cluster state data unavaible via PAPI without running shell scripts locally.
 
 Code should be used to obtain sysctl and other command output for use with monitoring or dashboards.
 
 All responses will be returned in json format.
 
-At present only a single endpoing ('/') is provuided which will return all sysctlk keys and the output of all commands in the config.json file.
+At present only a single endpoing ('/') is provided which will return all sysctl keys and the output of all commands in the config.json file.
 
 
 ### Installation
@@ -27,7 +27,7 @@ cd isitinyapi
   - keep the list as short as possible and keep in mind the runtime that each command will take (total cannot exceed 2 min)
 
 #### Add to mcp crontab
-- edit the /etc/mcp/templates/crontab file and add the following lines to the end per this KB: https://www.dell.com/support/kbdoc/en-us/000190875/isilon-how-to-automate-weekly-cluster-log-uploads-isi-gather-info
+- edit the /etc/mcp/templates/crontab file and add the following lines to the end: see [this KB](https://www.dell.com/support/kbdoc/en-us/000190875/isilon-how-to-automate-weekly-cluster-log-uploads-isi-gather-info)
 
 ```
 # Every hour check to ensure isi_tiny_api is running
@@ -38,7 +38,6 @@ Once the cron entry is in place the run.sh script will check hourly to see if th
 
 #### Add to apache config file /usr/local/apache2/conf/webui_httpd.conf
 
-Add these two modules line to the Modules Section near the top
 
 ```
 
