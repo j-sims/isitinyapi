@@ -6,7 +6,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
 import time
 
-INSTALLPATH = "/ifs/data/Isilon_Support/tinyapi"
+INSTALLPATH = "/ifs/data/Isilon_Support/isitinyapi"
 
 with open(f'{INSTALLPATH}/config.json', 'r') as f:
     config = json.load(f)
