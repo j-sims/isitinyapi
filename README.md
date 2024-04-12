@@ -1,7 +1,13 @@
 # Isi Tiny API
 
 ### Description
-Sample code for serving config data not available through PAPI. Caching added to ensure the code doesn't impact services.
+Sample code to allow for polling of cluster state data without running shell scripts locally.
+
+Code should be used to obtain sysctl and other command output for use with monitoring or dashboards.
+
+All responses will be returned in json format.
+
+At present only a single endpoing ('/') is provuided which will return all sysctlk keys and the output of all commands in the config.json file.
 
 
 ### Installation
@@ -58,3 +64,10 @@ Add this location section near the bottom after the last Location section
         ErrorDocument 401 /json/401.json
     </Location>
 ```
+
+### Limitations
+The code is designed to poll a few sysctls and/or run a handful of commands. The default caching is 1 hour to minimize the impact from running external commands. Reducing the cache timer or significantly increasing the number of commands run can have a detrimental effect on a cluster.
+
+The code is designed to only allow GET options and is intended to only allow access on the localhost address to minimize the surface area of attacks. Changing either should only be done with careful consideration and the approval of the infosec team.
+
+The changes in these instructions may be lost during upgrades. After each upgrade check to see if the service is still operating and re-install if needed.
