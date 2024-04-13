@@ -8,6 +8,8 @@ The code should be used to obtain outputs from `sysctl` and other commands for m
 All responses are returned in JSON format.
 
 Currently, only a single endpoint ('/') is provided, which returns all `sysctl` keys and the outputs of all commands specified in the `config.json` file.
+## Risks
+Installing the Tiny API requires executing unix shell commands and hand editing the apache config file. Unless the user is experienced making changes such as these in a production they risk breaking the apache configuration and rendering the WebUI inaccessible.
 
 ## Installation
 Installing the services requires changes to the apache config file and adding it to the crontab.
@@ -141,12 +143,26 @@ isi_for_array bash /ifs/data/Isilon_Support/isitinyapi-main/run.sh
 ```
 
 
-### Test the Service
-open a broweser to https://CLUSTER:8080/tinyapi
-(replace CLUSTER with the name or IP of your cluster)
-
 ## Role Based Access
 Access to the service requires both an authenticated user and 'r'ead access to the platform api. Refer to the administration guide for instructions on creating a role with platform access and adding a user to that role.
+
+## Testing Tiny API
+
+### Create local user or skip and use existing user.
+```
+isi auth users create --set-password --enabled=True --provider LOCAL:System test
+```
+
+### Create role and assign user
+```
+isi auth roles create TinyAPI
+isi auth roles modify --add-user test --add-priv-read ISI_PRIV_LOGIN_PAPI TinyAPI
+```
+
+### edit test.py and replace clusterip, username and password, then run
+```
+python3 test.py
+````
 
 ## Limitations
 This code is engineered to efficiently monitor a select set of sysctl parameters and execute a limited number of commands. By default, it employs a caching mechanism with a one-hour duration to minimize system load from frequent external command executions. Any reduction in the caching period or a significant increase in the number of commands could adversely affect cluster performance.
@@ -173,23 +189,6 @@ Updates are only recognized and implemented at startup. For an upgrade, simply d
 
 The same procedure applies for configuration updates.
 
-## Testing Tiny API
-
-### Create local user or skip and use existing user.
-```
-isi auth users create --set-password --enabled=True --provider LOCAL:System test
-```
-
-### Create role and assign user
-```
-isi auth roles create TinyAPI
-isi auth roles modify --add-user test --add-priv-read ISI_PRIV_LOGIN_PAPI TinyAPI
-```
-
-### edit test.py and replace clusterip, username and password, then run
-```
-python3 test.py
-````
 
 ## Uninstall Tiny API
 Remove the following two lines from the /etc/mcp/templates/crontab file and then restart isi_mcp:
