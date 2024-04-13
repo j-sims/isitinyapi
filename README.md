@@ -124,6 +124,7 @@ isi_for_array bash /ifs/data/Isilon_Support/isitinyapi-main/deployhttpdconf.sh
 **single node**
 ```
 bash /ifs/data/Isilon_Support/isitinyapi-main/run.sh && \
+sleep 3 && \
 ps -auxww | grep isi_tiny_api.py | grep -v grep > /dev/null && echo Running || echo "Not Running"
 ```
 
