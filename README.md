@@ -166,7 +166,25 @@ Updates are only recognized and implemented at startup. For an upgrade, simply d
 
 The same procedure applies for configuration updates.
 
-## Removal
+## Testing Tiny API
+
+### Create local user or skip and use existing user.
+```
+isi auth users create --set-password --enabled=True --provider LOCAL:System test
+```
+
+### Create role and assign user
+```
+isi auth roles create TinyAPI
+isi auth roles modify --add-user test --add-priv-read ISI_PRIV_LOGIN_PAPI TinyAPI
+```
+
+### edit test.py and replace clusterip, username and password, then run
+```
+python3 test.py
+````
+
+## Uninstall Tiny API
 Remove the following two lines from the /etc/mcp/templates/crontab file and then restart isi_mcp:
 
 ### Remove these lines
