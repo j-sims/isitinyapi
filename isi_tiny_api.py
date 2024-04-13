@@ -25,38 +25,38 @@ def logit(config, message):
 def is_cached(config):
     file_path = Path(config['main']['cache_file'])
     if not os.path.exists(file_path):
-        logit(f"file not found {file_path}")
+        logit(config,f"file not found {file_path}")
         return False
     mtime = file_path.stat().st_mtime
     current_time = time.time()
     age = (current_time - mtime)
     if age > 3600:
-        logit(f"Cached results to old: {age}")
+        logit(config,f"Cached results to old: {age}")
         return False
-    logit("cached results, returning")
+    logit(config,"cached results, returning")
     return True
 
 
 def run_command(command):
-    logit(f"Running command: {command}")
+    logit(config,f"Running command: {command}")
     result = subprocess.run(command, capture_output=True, text=True, shell=True)
     if result.returncode == 0:
         return result
     else:
-        logit(f"error: {result}")
+        logit(config,f"error: {result}")
         return result
 
 class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         # Parse the URL path
         if self.path == '/':
-            logit("Handling root path GET request")
+            logit(config,"Handling root path GET request")
             self.handle_root_path()
         else:
-            logit(f"Unknown Path {self.path}")
+            logit(config,f"Unknown Path {self.path}")
             self.handle_404()
     def do_POST(self):
-        logit(f"POST not supported")
+        logit(config,f"POST not supported")
         self.handle_404()
         
     def handle_root_path(self):
@@ -81,7 +81,9 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
                 if result.returncode != 0:
                     send_error_code = True
                     data['sysctl'][key] = result.stderr.rstrip()
-                else:OneFS-5.0.0-APITest2
+                else:
+                    data['sysctl'][key] = result.stdout.rstrip()
+
             for cmd in config['commands']:
                 result = run_command(cmd)
 
@@ -106,7 +108,7 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
 
 
     def handle_404(self):
-        logit("404 not found")
+        logit(config,"404 not found")
         self.send_response(404)
         self.send_header('Content-type', 'application/json')
         self.end_headers()
@@ -114,13 +116,13 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
         self.wfile.write(json.dumps(response).encode('utf-8'))
 
 def run(server_class=HTTPServer, handler_class=SimpleHTTPRequestHandler):
-    logit(f"Starting Server on {config['main']['address']}:{config['main']['port']}")
+    logit(config,f"Starting Server on {config['main']['address']}:{config['main']['port']}")
     server_address = (config['main']['address'], config['main']['port'])
     httpd = server_class(server_address, handler_class)
     httpd.serve_forever()
-    logit("Waiting for Connections")
+    logit(config,"Waiting for Connections")
 
 
 if __name__ == "__main__":
-    logit("#### Startup ####")
+    logit(config,"#### Startup ####")
     run()
