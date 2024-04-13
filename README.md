@@ -89,7 +89,7 @@ to this:
 
 #### Add this immediately after the Platform API section
 ```
-   # =================================================
+    # =================================================
     # Tiny API
     # =================================================
     <Location /tinyapi>
@@ -189,6 +189,16 @@ LoadModule proxy_module modules/mod_proxy.so
 LoadModule proxy_http_module modules/mod_proxy_http.so
 ```
 
+#### Remove tinyapi from list of auth services
+Change near line 358 from this:
+```
+         IsiAuthServices platform remote-service namespace tinyapi
+```
+to this:
+```
+         IsiAuthServices platform remote-service namespace 
+```
+
 #### Remove near bottom of /usr/local/apache2/conf/webui_httpd.conf
 ```
     # =================================================
@@ -196,7 +206,7 @@ LoadModule proxy_http_module modules/mod_proxy_http.so
     # =================================================
     <Location /tinyapi>
         AuthType Isilon
-        IsiAuthName "platform"
+        IsiAuthName "tinyapi"
         IsiAuthTypeBasic On
         IsiAuthTypeSessionCookie On
         IsiDisabledZoneAllow Off
@@ -205,9 +215,8 @@ LoadModule proxy_http_module modules/mod_proxy_http.so
         ProxyPass "http://localhost:8000/"
         ProxyPassReverse "http://localhost:8000/"
         Require valid-user
-        SetHandler fastcgi-script
-        Options +ExecCGI
         ErrorDocument 401 /json/401.json
+        Header set Content-Security-Policy "default-src 'none'"
     </Location>
 ```
 
