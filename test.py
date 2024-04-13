@@ -8,12 +8,6 @@ PORT=8080
 USER='testuser'
 PASS='a'
 
-uri = "https://%s:%s" % (CLUSTERIP, PORT)
-papi = uri + '/platform'
-headers = {'Content-Type': 'application/json'}
-data = json.dumps({'username': USER, 'password': PASS, 'services': ['platform']})
-
-
 # uri of the cluster used in the referer header
 uri = f"https://{CLUSTERIP}:{PORT}"
 # url of Papi used for all further calls to Papi
@@ -21,7 +15,7 @@ papi = uri + '/platform'
 # Set header as content will provided in json format
 headers = {'Content-Type': 'application/json'}
 # Create json dictionary for auth
-data = json.dumps({'username': USER, 'password': PASS, 'services': ['platform']})
+data = json.dumps({'username': USER, 'password': PASS, 'services': ['tinyapi']})
 # create a session object to hold cookies
 session = requests.Session()
 # Establish session using auth credentials
