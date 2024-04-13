@@ -4,7 +4,9 @@
         "address": "127.0.0.1",
         "port": 8000,
         "cache_time": 3600,
-        "cache_file" : "/tmp/isi_tiny_api.cache"
+        "cache_file" : "/tmp/isi_tiny_api.cache",
+        "log_file" : "/tmp/isi_tiny_api.log",
+        "debug" : false
         },
     "sysctl" : [ "kern.minvnodes", "vfs.numvnodes", "vfs.numvnodes", "vfs.freevnodes", "vfs.wantfreevnodes" ],
     "commands": ["hostname", "date", "uptime"]

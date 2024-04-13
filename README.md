@@ -10,7 +10,19 @@ All responses are returned in JSON format.
 Currently, only a single endpoint ('/') is provided, which returns all `sysctl` keys and the outputs of all commands specified in the `config.json` file.
 
 ## Installation
-Installing the service requires the root user and modifications to the crontab and to the apache config file.
+Installing the services requires changes to the apache config file and adding it to the crontab.
+
+The apache config file change consists of adding two sections and an additional keyword to one line.
+
+As the version of apache and the config file format can change between releases the steps here are provided as guidance and cannot be taken as an exact process.
+
+### Install High Level Process
+- Download the code to one node in /ifs/data/Isilon_Support
+- Extract in place creating isitinyapi-main
+- Edit the config.json file to define systl keys and commands
+- Run installcron.sh on one or all nodes to monitor the service hourly and restart if needed
+- Copy the webui config file, edit, and run deployhttpd.sh on one or all nodes
+- Manually start the service the first time on one or all nodes OR wait until the next hour for the service to be started by cron
 
 ### Single Node or All Nodes?
 If the data that is needed can be collected from a single node then the installation can be performed on one node. However, if the data needed is from each node then the installation will need to be performed on all nodes.
@@ -46,9 +58,10 @@ Once the cron entry is in place the run.sh script will check hourly to see if th
 
 ### Configure Apache
 
-### Copy /usr/local/apache2/conf/webui_httpd.conf
+### Copy /usr/local/apache2/conf/webui_httpd.conf and backup
 ```
 cp  /usr/local/apache2/conf/webui_httpd.conf /ifs/data/Isilon_Support/isitinyapi-main
+cp  /usr/local/apache2/conf/webui_httpd.conf /usr/local/apache2/conf/webui_httpd.conf.orig.`date`
 ```
 
 ### Edit /ifs/data/Isilon_Support/isitinyapi-main/webui_httpd.conf
@@ -63,14 +76,25 @@ LoadModule proxy_module modules/mod_proxy.so
 LoadModule proxy_http_module modules/mod_proxy_http.so
 ```
 
-#### Add this immeditaly after the Platform API section
+#### Add tinyapi to list of services
+Change near line 358 from this:
 ```
-    # =================================================
+         IsiAuthServices platform remote-service namespace
+```
+to this:
+```
+         IsiAuthServices platform remote-service namespace tinyapi
+```
+
+
+#### Add this immediately after the Platform API section
+```
+   # =================================================
     # Tiny API
     # =================================================
     <Location /tinyapi>
         AuthType Isilon
-        IsiAuthName "platform"
+        IsiAuthName "tinyapi"
         IsiAuthTypeBasic On
         IsiAuthTypeSessionCookie On
         IsiDisabledZoneAllow Off
@@ -79,9 +103,8 @@ LoadModule proxy_http_module modules/mod_proxy_http.so
         ProxyPass "http://localhost:8000/"
         ProxyPassReverse "http://localhost:8000/"
         Require valid-user
-        SetHandler fastcgi-script
-        Options +ExecCGI
         ErrorDocument 401 /json/401.json
+        Header set Content-Security-Policy "default-src 'none'"
     </Location>
 ```
 
@@ -113,6 +136,9 @@ isi_for_array bash /ifs/data/Isilon_Support/isitinyapi-main/run.sh
 ### Test the Service
 open a broweser to https://CLUSTER:8080/tinyapi
 (replace CLUSTER with the name or IP of your cluster)
+
+## Role Based Access
+Access to the service requires both an authenticated user and 'r'ead access to the platform api. Refer to the administration guide for instructions on creating a role with platform access and adding a user to that role.
 
 ## Limitations
 This code is engineered to efficiently monitor a select set of sysctl parameters and execute a limited number of commands. By default, it employs a caching mechanism with a one-hour duration to minimize system load from frequent external command executions. Any reduction in the caching period or a significant increase in the number of commands could adversely affect cluster performance.
