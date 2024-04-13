@@ -59,9 +59,16 @@ Once the cron entry is in place the run.sh script will check hourly to see if th
 ### Configure Apache
 
 ### Copy /usr/local/apache2/conf/webui_httpd.conf and backup
+
+**single node**
 ```
 cp  /usr/local/apache2/conf/webui_httpd.conf /ifs/data/Isilon_Support/isitinyapi-main
 cp  /usr/local/apache2/conf/webui_httpd.conf /usr/local/apache2/conf/webui_httpd.conf.orig.`date "+%Y%m%d%H%M%S"`
+```
+**all nodes**
+```
+isi_for_array cp  /usr/local/apache2/conf/webui_httpd.conf /ifs/data/Isilon_Support/isitinyapi-main
+isi_for_array cp  /usr/local/apache2/conf/webui_httpd.conf /usr/local/apache2/conf/webui_httpd.conf.orig.`date "+%Y%m%d%H%M%S"`
 ```
 
 ### Edit /ifs/data/Isilon_Support/isitinyapi-main/webui_httpd.conf
