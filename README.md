@@ -9,9 +9,12 @@ All responses are returned in JSON format.
 
 Currently, only a single endpoint ('/') is provided, which returns all `sysctl` keys and the outputs of all commands specified in the `config.json` file.
 ## Risks
-Installing the Tiny API requires executing unix shell commands and hand editing the apache config file. Unless the user is experienced making changes such as these in a production they risk breaking the apache configuration and rendering the WebUI inaccessible.
+Installing the Tiny API requires executing unix shell commands and hand editing the apache config file. Unless the user is experienced making changes such as these in a production environment they risk breaking the apache configuration and rendering the WebUI inaccessible.
 
 Proceeding to install is to accept the risk to the environment. Such changes are not supported by Dell EMC.
+
+## Requirements
+OneFS version 9.5+ is required
 
 ## Installation
 Installing the services requires changes to the apache config file and adding it to the crontab.
