@@ -13,7 +13,8 @@ It is particularly useful for monitoring systems and creating dashboards.
 
 
 ## Risks
-Running Unix shell commands and modifying the Apache configuration files can potentially disrupt Apache services and make the WebUI inaccessible if errors are made. These risks are significant unless managed by experienced personnel in production environments. Dell EMC does not support modifications to the apache configuration file.
+Running Unix shell commands and modifying the Apache configuration files can potentially disrupunzip isi_tiny_api.zip
+cd isitinyapi-mainhese risks are significant unless managed by experienced personnel in production environments. Dell EMC does not support modifications to the apache configuration file.
 
 ## Requirements
 
@@ -33,6 +34,7 @@ There are two main installation options: modifying Apache or running the server 
     curl -k -L -o isi_tiny_api.zip https://github.com/j-sims/isitinyapi/archive/refs/heads/main.zip
     unzip isi_tiny_api.zip
     cd isitinyapi-main
+    
     ```
 
 2. **Edit Configuration**:
