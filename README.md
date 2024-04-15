@@ -34,7 +34,7 @@ There are two main installation options: modifying Apache or running the server 
     curl -k -L -o isi_tiny_api.zip https://github.com/j-sims/isitinyapi/archive/refs/heads/main.zip
     unzip isi_tiny_api.zip
     cd isitinyapi-main
-    
+
     ```
 
 2. **Edit Configuration**:
@@ -46,11 +46,13 @@ There are two main installation options: modifying Apache or running the server 
    **single node**
        ```
        bash /ifs/data/Isilon_Support/isitinyapi-main/installcron.sh
+       grep sitinyapi-main /etc/crontab
        ```
 
    **all nodes**
        ```
        isi_for_array bash /ifs/data/Isilon_Support/isitinyapi-main/installcron.sh
+       isi_for_array grep sitinyapi-main /etc/crontab
        ```
 4. **Configure**
     - **Independent Server Configuration (Option 1, Simple)**
