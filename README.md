@@ -154,8 +154,23 @@ There are two main installation options: modifying Apache or running the server 
    - The easiest way to star the service is to wait for cron job to start the service which will happen at the top of the next hour (ex. 10:00a, 11:00a, 12:00p)
 
    - Alternatively, the impatient can start manually by running the `run.sh` script as root
+
+     - single node
+
+      ```
+      bash /ifs/data/Isilon_Support/isitinyapi-main/run.sh
+      ps -auxww | grep isi_tiny_api.py | grep -v grep
+      ```
+
+     - all nodes
+
+      ```
+      isi_for_array bash /ifs/data/Isilon_Support/isitinyapi-main/run.sh
+      isi_for_array ps -auxww | grep isi_tiny_api.py | grep -v grep
+      ```
+
+
    
-   ```bash /ifs/data/Isilon_Support/isitinyapi-main/run.sh```
 
 ## Updates / Configuration Changes
 
