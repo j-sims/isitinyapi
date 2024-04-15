@@ -138,13 +138,13 @@ There are two main installation options: modifying Apache or running the server 
             ```
 
         3. Deploy apache config
-                **single node**
+            - single node
 
                 ```
                 bash /ifs/data/Isilon_Support/isitinyapi-main/deployhttpdconf.sh
                 ```
                 
-                **all nodes**
+            - all nodes
                 
                 ```
                 isi_for_array bash /ifs/data/Isilon_Support/isitinyapi-main/deployhttpdconf.sh
