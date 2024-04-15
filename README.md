@@ -9,7 +9,7 @@ It is particularly useful for monitoring systems and creating dashboards.
 
 - **Single Endpoint**: The API has a single endpoint (`/`) which outputs all sysctl keys and command outputs defined in the `config.json` file.
 - **Output Format**: All responses are in JSON.
-- **builtin caching** to prevent impacts to performance from abusive or misconfigured applications
+- **Builtin caching** to prevent impacts to performance from abusive or misconfigured applications
 
 
 ## Risks
