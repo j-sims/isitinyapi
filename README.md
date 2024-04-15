@@ -29,7 +29,7 @@ There are two main installation options: modifying Apache or running the server 
 1. **Download and Extract**:
     One a single node of the cluster download and extract:
 
-    ```bash 
+    ``` 
     cd /ifs/data/Isilon_Support
     curl -k -L -o isi_tiny_api.zip https://github.com/j-sims/isitinyapi/archive/refs/heads/main.zip
     unzip isi_tiny_api.zip
@@ -45,14 +45,14 @@ There are two main installation options: modifying Apache or running the server 
 
    **single node**
 
-       ```bash
+       ```
        bash /ifs/data/Isilon_Support/isitinyapi-main/installcron.sh
        grep sitinyapi-main /etc/crontab
        ```
 
    **all nodes**
 
-       ```bash
+       ```
        isi_for_array bash /ifs/data/Isilon_Support/isitinyapi-main/installcron.sh
        isi_for_array grep sitinyapi-main /etc/crontab
        ```
@@ -79,14 +79,14 @@ There are two main installation options: modifying Apache or running the server 
 
             **single node**
 
-            ```bash
+            ```
             cp  /usr/local/apache2/conf/webui_httpd.conf /ifs/data/Isilon_Support/isitinyapi-main
             cp  /usr/local/apache2/conf/webui_httpd.conf /usr/local/apache2/conf/webui_httpd.conf.orig.`date "+%Y%m%d%H%M%S"`
             ```
 
             **all nodes**
 
-            ```bash
+            ```
             isi_for_array cp  /usr/local/apache2/conf/webui_httpd.conf /ifs/data/Isilon_Support/isitinyapi-main
             isi_for_array cp  /usr/local/apache2/conf/webui_httpd.conf /usr/local/apache2/conf/webui_httpd.conf.orig.`date "+%Y%m%d%H%M%S"`
             ```
@@ -96,7 +96,7 @@ There are two main installation options: modifying Apache or running the server 
 
             - Add near top with other LoadModules
 
-            ```apache
+            ```
 
             LoadModule proxy_module modules/mod_proxy.so
             LoadModule proxy_http_module modules/mod_proxy_http.so
@@ -105,19 +105,19 @@ There are two main installation options: modifying Apache or running the server 
             - Add tinyapi to list of services
             Change near line 358 from this:
 
-            ```apache
+            ```
                     IsiAuthServices platform remote-service namespace
             ```
 
             to this:
 
-            ```apache
+            ```
                     IsiAuthServices platform remote-service namespace tinyapi
             ```
 
             - Add this immediately after the Platform API section
 
-            ```apache
+            ```
                 # =================================================
                 # Tiny API
                 # =================================================
@@ -143,7 +143,7 @@ There are two main installation options: modifying Apache or running the server 
                 bash /ifs/data/Isilon_Support/isitinyapi-main/deployhttpdconf.sh
                 ```
                 **all nodes**
-                ```bash
+                ```
                 isi_for_array bash /ifs/data/Isilon_Support/isitinyapi-main/deployhttpdconf.sh
                 ```
 
@@ -157,7 +157,7 @@ There are two main installation options: modifying Apache or running the server 
 
 Changes to the config.json are applied at runtime. Code updates or config.json changes should be followed by terminating the service and then allowing it to start again.
 
-```bash
+```
 ps-auxww | grep -i isi_tiny_api.py | grep -v grep | xargs kill -9 
 ```
 
@@ -184,19 +184,19 @@ Access to the service requires both an authenticated user and 'r'ead access to t
 Error loading webview: Error: Could not register service worker: InvalidStateError: Failed to register a ServiceWorker: The document is in an invalid state..
 ### Create local user or skip to use existing user
 
-```bash
+```
 isi auth users create --set-password --enabled=True --provider LOCAL:System test
 ```
 
 ### Create role and assign user
 
-```bash
+```
 isi auth roles create TinyAPI
 isi auth roles modify --add-user test --add-priv-read ISI_PRIV_LOGIN_PAPI TinyAPI
 ```
 
 ### edit test.py and replace clusterip, username and password, then run
 
-```bash
+```
 python3 test.py
 ````
