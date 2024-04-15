@@ -13,7 +13,7 @@ It is particularly useful for monitoring systems and creating dashboards.
 
 
 ## Risks
-Modifying Unix shell commands or Apache configuration files can potentially disrupt Apache services and make the WebUI inaccessible. These risks are significant unless managed by experienced personnel in production environments. Dell EMC does not support modifications to the apache configuration file.
+Running Unix shell commands and modifying the Apache configuration files can potentially disrupt Apache services and make the WebUI inaccessible if errors are made. These risks are significant unless managed by experienced personnel in production environments. Dell EMC does not support modifications to the apache configuration file.
 
 ## Requirements
 
@@ -21,8 +21,7 @@ Modifying Unix shell commands or Apache configuration files can potentially disr
 
 ## Installation Options
 
-There are two main installation options: modifying Apache or running the server on a specific port independently. Each has different security implications and setup steps.
-
+There are two main installation options: modifying Apache or running the server on a alternate port independently. There are separate steps outlines below for each.
 
 ### General Setup
 
