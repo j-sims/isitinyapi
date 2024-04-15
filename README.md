@@ -44,13 +44,15 @@ There are two main installation options: modifying Apache or running the server 
    - Install the cron job on either a single node or all nodes by running one of the following:
 
    **single node**
-       ```
+
+       ```bash
        bash /ifs/data/Isilon_Support/isitinyapi-main/installcron.sh
        grep sitinyapi-main /etc/crontab
        ```
 
    **all nodes**
-       ```
+
+       ```bash
        isi_for_array bash /ifs/data/Isilon_Support/isitinyapi-main/installcron.sh
        isi_for_array grep sitinyapi-main /etc/crontab
        ```
