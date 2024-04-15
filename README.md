@@ -77,14 +77,14 @@ There are two main installation options: modifying Apache or running the server 
 
         1. Copy /usr/local/apache2/conf/webui_httpd.conf and backup
 
-            **single node**
+           - single node
 
             ```
             cp  /usr/local/apache2/conf/webui_httpd.conf /ifs/data/Isilon_Support/isitinyapi-main
             cp  /usr/local/apache2/conf/webui_httpd.conf /usr/local/apache2/conf/webui_httpd.conf.orig.`date "+%Y%m%d%H%M%S"`
             ```
 
-            **all nodes**
+           - all nodes
 
             ```
             isi_for_array cp  /usr/local/apache2/conf/webui_httpd.conf /ifs/data/Isilon_Support/isitinyapi-main
@@ -119,7 +119,7 @@ There are two main installation options: modifying Apache or running the server 
 
             ```
                 # =================================================
-                # Tiny API
+                # Tiny A**all nodes**PI
                 # =================================================
                 <Location /tinyapi>
                     AuthType Isilon
