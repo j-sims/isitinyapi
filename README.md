@@ -9,7 +9,7 @@ It is particularly useful for monitoring systems and creating dashboards.
 
 - **Single Endpoint**: The API has a single endpoint (`/`) which outputs all sysctl keys and command outputs defined in the `config.json` file.
 - **Output Format**: All responses are in JSON.
-- builtin caching to prevent impacts to performance from abusive or misconfigured applications
+- **builtin caching** to prevent impacts to performance from abusive or misconfigured applications
 
 
 ## Risks
@@ -164,7 +164,7 @@ To uninstall:
 - Remove changes to webui-httpd.conf and deploy
 - Terminate the service: ```ps-auxww | grep -i isi_tiny_api.py | grep -v grep | xargs kill -9```
 - Delete the installation files from the system.
-
+Error loading webview: Error: Could not register service worker: InvalidStateError: Failed to register a ServiceWorker: The document is in an invalid state..
 ## Limitations and Security
 
 The API is designed to minimize system load by caching responses and limiting the frequency of command executions. It accepts only GET requests and restricts access to localhost for enhanced security using the Apache install to proxy requests isolating the python http server. Any deviations from this setup should be carefully evaluated in light of security considerations.
@@ -176,7 +176,7 @@ Configure `test.py` with the appropriate cluster IP, username, and password and 
 ## Role Based Access
 
 Access to the service requires both an authenticated user and 'r'ead access to the platform api. Refer to the administration guide for instructions on creating a role with platform access and adding a user to that role.
-
+Error loading webview: Error: Could not register service worker: InvalidStateError: Failed to register a ServiceWorker: The document is in an invalid state..
 ### Create local user or skip to use existing user
 
 ```bash
