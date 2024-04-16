@@ -13,8 +13,9 @@ It is particularly useful for monitoring systems and creating dashboards.
 
 
 ## Risks
-Running Unix shell commands and modifying the Apache configuration files can potentially disrupunzip isi_tiny_api.zip
-cd isitinyapi-mainhese risks are significant unless managed by experienced personnel in production environments. Dell EMC does not support modifications to the apache configuration file.
+Modifying Unix shell commands or Apache configuration files can potentially disrupt Apache services and make the WebUI inaccessible. These risks are significant unless managed by experienced personnel in production environments. Dell EMC does not support these modifications.
+
+
 
 ## Requirements
 
